@@ -8,17 +8,17 @@ public class ConnectionExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 					"jdbc:oracle:thin:@localhost:1521/XE",
 					"java",
 					"oracle"
 					);
 			
-			System.out.println("¿¬°á ¼º°ø");
+			System.out.println("ì—°ê²° ì„±ê³µ");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -26,9 +26,9 @@ public class ConnectionExample {
 		} finally {
 			if(conn != null) {
 				try {
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close();
-					System.out.println("¿¬°á ²÷±â");
+					System.out.println("ì—°ê²° ëŠê¸°");
 				} catch (SQLException e) {}
 			}
 		}
