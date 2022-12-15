@@ -9,33 +9,33 @@ public class UserInsertExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = "" +
 				"INSERT INTO users(userid, username, userpassword, userage, useremail)" + "VALUES(?, ?, ?, ?, ?)";
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "winter2");
-			pstmt.setString(2, "ÇÑ°Ü¿ï");
+			pstmt.setString(2, "í•œê²¨ìš¸");
 			pstmt.setString(3, "12345");
 			pstmt.setInt(4, 25);
 			pstmt.setString(5, "winter@mycompany.com");
 			
-			//SQL ¹® ½ÇÇà
+			//SQL ë¬¸ ì‹¤í–‰
 			int rows = pstmt.executeUpdate();
-			System.out.println("ÀúÀåµÈ Çà ¼ö: " + rows);
+			System.out.println("ì €ì¥ëœ í–‰ ìˆ˜: " + rows);
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class UserInsertExample {
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
