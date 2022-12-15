@@ -17,10 +17,10 @@ public class BoardExample9 {
 	//Constructor
 	public BoardExample9() {
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
@@ -34,14 +34,14 @@ public class BoardExample9 {
 	
 	//Method	
 	public void list() {
-		//Å¸ÀÌÆ² ¹× ÄÃ·³¸í Ãâ·Â
+		//íƒ€ì´í‹€ ë° ì»¬ëŸ¼ëª… ì¶œë ¥
 		System.out.println();
-		System.out.println("[°Ô½Ã¹° ¸ñ·Ï]");
+		System.out.println("[ê²Œì‹œë¬¼ ëª©ë¡]");
 		System.out.println("-----------------------------------------------------------------------");
 		System.out.printf("%-6s%-12s%-16s%-40s\n", "no", "writer", "date", "title");
 		System.out.println("-----------------------------------------------------------------------");
 		
-		//boards Å×ÀÌºí¿¡¼­ °Ô½Ã¹° Á¤º¸¸¦ °¡Á®¿Í¼­ Ãâ·ÂÇÏ±â
+		//boards í…Œì´ë¸”ì—ì„œ ê²Œì‹œë¬¼ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ ì¶œë ¥í•˜ê¸°
 		try {
 			String sql = "" +
 				"SELECT bno, btitle, bcontent, bwriter, bdate " +
@@ -69,15 +69,15 @@ public class BoardExample9 {
 			exit();
 		}
 		
-		//¸ŞÀÎ ¸Ş´º Ãâ·Â
+		//ë©”ì¸ ë©”ë‰´ ì¶œë ¥
 		mainMenu();
 	}
 	
 	public void mainMenu() {
 		System.out.println();
 		System.out.println("-----------------------------------------------------------------------");
-		System.out.println("¸ŞÀÎ ¸Ş´º: 1.Create | 2.Read | 3.Clear | 4.Exit");
-		System.out.print("¸Ş´º ¼±ÅÃ: ");
+		System.out.println("ë©”ì¸ ë©”ë‰´: 1.Create | 2.Read | 3.Clear | 4.Exit");
+		System.out.print("ë©”ë‰´ ì„ íƒ: ");
 		String menuNo = scanner.nextLine();
 		System.out.println();
 		
@@ -90,23 +90,23 @@ public class BoardExample9 {
 	}	
 	
 	public void create() {
-		//ÀÔ·Â ¹Ş±â
+		//ì…ë ¥ ë°›ê¸°
 		Board board = new Board();
-		System.out.println("[»õ °Ô½Ã¹° ÀÔ·Â]");
-		System.out.print("Á¦¸ñ: "); 	
+		System.out.println("[ìƒˆ ê²Œì‹œë¬¼ ì…ë ¥]");
+		System.out.print("ì œëª©: "); 	
 		board.setBtitle(scanner.nextLine());
-		System.out.print("³»¿ë: "); 	
+		System.out.print("ë‚´ìš©: "); 	
 		board.setBcontent(scanner.nextLine());
-		System.out.print("ÀÛ¼ºÀÚ: "); 	
+		System.out.print("ì‘ì„±ì: "); 	
 		board.setBwriter(scanner.nextLine());
 		
-		//º¸Á¶ ¸Ş´º Ãâ·Â
+		//ë³´ì¡° ë©”ë‰´ ì¶œë ¥
 		System.out.println("-----------------------------------------------------------------------");
-		System.out.println("º¸Á¶ ¸Ş´º: 1.Ok | 2.Cancel");
-		System.out.print("¸Ş´º ¼±ÅÃ: ");
+		System.out.println("ë³´ì¡° ë©”ë‰´: 1.Ok | 2.Cancel");
+		System.out.print("ë©”ë‰´ ì„ íƒ: ");
 		String menuNo = scanner.nextLine();
 		if(menuNo.equals("1")) {
-			//boards Å×ÀÌºí¿¡ °Ô½Ã¹° Á¤º¸ ÀúÀå
+			//boards í…Œì´ë¸”ì— ê²Œì‹œë¬¼ ì •ë³´ ì €ì¥
 			try {
 				String sql = "" +
 					"INSERT INTO boards (bno, btitle, bcontent, bwriter, bdate) " +
@@ -123,17 +123,17 @@ public class BoardExample9 {
 			}
 		}
 		
-		//°Ô½Ã¹° ¸ñ·Ï Ãâ·Â
+		//ê²Œì‹œë¬¼ ëª©ë¡ ì¶œë ¥
 		list();
 	}
 	
 	public void read() {
-		//ÀÔ·Â ¹Ş±â
-		System.out.println("[°Ô½Ã¹° ÀĞ±â]");
+		//ì…ë ¥ ë°›ê¸°
+		System.out.println("[ê²Œì‹œë¬¼ ì½ê¸°]");
 		System.out.print("bno: "); 	
 		int bno = Integer.parseInt(scanner.nextLine());
 		
-		//boards Å×ÀÌºí¿¡¼­ ÇØ´ç °Ô½Ã¹°À» °¡Á®¿Í Ãâ·Â
+		//boards í…Œì´ë¸”ì—ì„œ í•´ë‹¹ ê²Œì‹œë¬¼ì„ ê°€ì ¸ì™€ ì¶œë ¥
 		try {
 			String sql = "" +
 				"SELECT bno, btitle, bcontent, bwriter, bdate " +
@@ -150,15 +150,15 @@ public class BoardExample9 {
 				board.setBwriter(rs.getString("bwriter"));
 				board.setBdate(rs.getDate("bdate"));
 				System.out.println("#############");
-				System.out.println("¹øÈ£: " + board.getBno());
-				System.out.println("Á¦¸ñ: " + board.getBtitle());
-				System.out.println("³»¿ë: " + board.getBcontent());
-				System.out.println("ÀÛ¼ºÀÚ: " + board.getBwriter());
-				System.out.println("³¯Â¥: " + board.getBdate());
-				//º¸Á¶ ¸Ş´º Ãâ·Â
+				System.out.println("ë²ˆí˜¸: " + board.getBno());
+				System.out.println("ì œëª©: " + board.getBtitle());
+				System.out.println("ë‚´ìš©: " + board.getBcontent());
+				System.out.println("ì‘ì„±ì: " + board.getBwriter());
+				System.out.println("ë‚ ì§œ: " + board.getBdate());
+				//ë³´ì¡° ë©”ë‰´ ì¶œë ¥
 				System.out.println("-------------------------------------------------------------------");
-				System.out.println("º¸Á¶ ¸Ş´º: 1.Update | 2.Delete | 3.List");
-				System.out.print("¸Ş´º ¼±ÅÃ: ");
+				System.out.println("ë³´ì¡° ë©”ë‰´: 1.Update | 2.Delete | 3.List");
+				System.out.print("ë©”ë‰´ ì„ íƒ: ");
 				String menuNo = scanner.nextLine();
 				System.out.println();
 				
@@ -175,27 +175,27 @@ public class BoardExample9 {
 			exit();
 		}
 		
-		//°Ô½Ã¹° ¸ñ·Ï Ãâ·Â
+		//ê²Œì‹œë¬¼ ëª©ë¡ ì¶œë ¥
 		list();
 	}
 	
 	public void update(Board board) {
-		//¼öÁ¤ ³»¿ë ÀÔ·Â ¹Ş±â
-		System.out.println("[¼öÁ¤ ³»¿ë ÀÔ·Â]");
-		System.out.print("Á¦¸ñ: "); 	
+		//ìˆ˜ì • ë‚´ìš© ì…ë ¥ ë°›ê¸°
+		System.out.println("[ìˆ˜ì • ë‚´ìš© ì…ë ¥]");
+		System.out.print("ì œëª©: "); 	
 		board.setBtitle(scanner.nextLine());
-		System.out.print("³»¿ë: "); 	
+		System.out.print("ë‚´ìš©: "); 	
 		board.setBcontent(scanner.nextLine());
-		System.out.print("ÀÛ¼ºÀÚ: "); 	
+		System.out.print("ì‘ì„±ì: "); 	
 		board.setBwriter(scanner.nextLine());
 		
-		//º¸Á¶ ¸Ş´º Ãâ·Â
+		//ë³´ì¡° ë©”ë‰´ ì¶œë ¥
 		System.out.println("-------------------------------------------------------------------");
-		System.out.println("º¸Á¶ ¸Ş´º: 1.Ok | 2.Cancel");
-		System.out.print("¸Ş´º ¼±ÅÃ: ");
+		System.out.println("ë³´ì¡° ë©”ë‰´: 1.Ok | 2.Cancel");
+		System.out.print("ë©”ë‰´ ì„ íƒ: ");
 		String menuNo = scanner.nextLine();
 		if(menuNo.equals("1")) {
-			//boards Å×ÀÌºí¿¡¼­ °Ô½Ã¹° Á¤º¸ ¼öÁ¤
+			//boards í…Œì´ë¸”ì—ì„œ ê²Œì‹œë¬¼ ì •ë³´ ìˆ˜ì •
 			try {
 				String sql = "" +
 					"UPDATE boards SET btitle=?, bcontent=?, bwriter=? " +
@@ -213,12 +213,12 @@ public class BoardExample9 {
 			}
 		}
 		
-		//°Ô½Ã¹° ¸ñ·Ï Ãâ·Â
+		//ê²Œì‹œë¬¼ ëª©ë¡ ì¶œë ¥
 		list();
 	}
 	
 	public void delete(Board board) {
-		//boards Å×ÀÌºí¿¡ °Ô½Ã¹° Á¤º¸ »èÁ¦
+		//boards í…Œì´ë¸”ì— ê²Œì‹œë¬¼ ì •ë³´ ì‚­ì œ
 		try {
 			String sql = "DELETE FROM boards WHERE bno=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -230,18 +230,18 @@ public class BoardExample9 {
 			exit();
 		}
 		
-		//°Ô½Ã¹° ¸ñ·Ï Ãâ·Â		
+		//ê²Œì‹œë¬¼ ëª©ë¡ ì¶œë ¥		
 		list();
 	}
 	
 	public void clear() {
-		System.out.println("[°Ô½Ã¹° ÀüÃ¼ »èÁ¦]");
+		System.out.println("[ê²Œì‹œë¬¼ ì „ì²´ ì‚­ì œ]");
 		System.out.println("-------------------------------------------------------------------");
-		System.out.println("º¸Á¶ ¸Ş´º: 1.Ok | 2.Cancel");
-		System.out.print("¸Ş´º ¼±ÅÃ: ");
+		System.out.println("ë³´ì¡° ë©”ë‰´: 1.Ok | 2.Cancel");
+		System.out.print("ë©”ë‰´ ì„ íƒ: ");
 		String menuNo = scanner.nextLine();
 		if(menuNo.equals("1")) {
-			//boards Å×ÀÌºí¿¡ °Ô½Ã¹° Á¤º¸ ÀüÃ¼ »èÁ¦
+			//boards í…Œì´ë¸”ì— ê²Œì‹œë¬¼ ì •ë³´ ì „ì²´ ì‚­ì œ
 			try {
 				String sql = "TRUNCATE TABLE boards";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -253,7 +253,7 @@ public class BoardExample9 {
 			}
 		}
 			
-		//°Ô½Ã¹° ¸ñ·Ï Ãâ·Â
+		//ê²Œì‹œë¬¼ ëª©ë¡ ì¶œë ¥
 		list();
 	}
 	
@@ -264,7 +264,7 @@ public class BoardExample9 {
 			} catch (SQLException e) {
 			}
 		}
-		System.out.println("** °Ô½ÃÆÇ Á¾·á **");
+		System.out.println("** ê²Œì‹œíŒ ì¢…ë£Œ **");
 		System.exit(0);
 	}
 	
