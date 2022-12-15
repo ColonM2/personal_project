@@ -4,7 +4,7 @@ import java.sql.Blob;
 import java.util.Date;
 import lombok.Data;
 
-@Data //Constructor, Getter, Setter, hashCode(), equals(), toString() ÀÚµ¿ »ý¼º
+@Data //Constructor, Getter, Setter, hashCode(), equals(), toString() Ã€ÃšÂµÂ¿ Â»Ã½Â¼Âº
 public class Board {
 	private int bno;
 	private String btitle;
