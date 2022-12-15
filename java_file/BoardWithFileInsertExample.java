@@ -10,51 +10,51 @@ public class BoardWithFileInsertExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = "" +
 				"INSERT INTO boards (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata) " +
 				"VALUES (SEQ_BNO.NEXTVAL, ?, ?, ?, SYSDATE, ?, ?)";
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"bno"});
-			pstmt.setString(1, "´«¿À´Â ³¯");
-			pstmt.setString(2, "ÇÔ¹Ú´«ÀÌ ³»·Á¿ä.");
+			pstmt.setString(1, "ëˆˆì˜¤ëŠ” ë‚ ");
+			pstmt.setString(2, "í•¨ë°•ëˆˆì´ ë‚´ë ¤ìš”.");
 			pstmt.setString(3, "winter");
 			pstmt.setString(4, "snow.jpg");
 			pstmt.setBlob(5, new FileInputStream("src/project/snow.jpg"));
 			
-			//SQL ¹® ½ÇÇà
+			//SQL ë¬¸ ì‹¤í–‰
 			int rows = pstmt.executeUpdate();
-			System.out.println("ÀúÀåµÈ Çà ¼ö: " + rows);
+			System.out.println("ì €ì¥ëœ í–‰ ìˆ˜: " + rows);
 			
-			//bno °ª ¾ò±â
+			//bno ê°’ ì–»ê¸°
 			if(rows == 1) {
 				ResultSet rs = pstmt.getGeneratedKeys();
 				if(rs.next()) {
 					int bno = rs.getInt(1);
-					System.out.println("ÀúÀåµÈ bno: " + bno);
+					System.out.println("ì €ì¥ëœ bno: " + bno);
 				}
 				rs.close();
 			}
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
