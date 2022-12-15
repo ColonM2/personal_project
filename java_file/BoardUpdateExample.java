@@ -10,17 +10,17 @@ public class BoardUpdateExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = new StringBuilder()
 					.append("UPDATE boards SET ")
 					.append("btitle=?, ")
@@ -30,26 +30,26 @@ public class BoardUpdateExample {
 					.append("WHERE bno=?")
 					.toString();
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "´«»ç¶÷");
-			pstmt.setString(2, "´«À¸·Î ¸¸µç »ç¶÷");
+			pstmt.setString(1, "ëˆˆì‚¬ëŒ");
+			pstmt.setString(2, "ëˆˆìœ¼ë¡œ ë§Œë“  ì‚¬ëŒ");
 			pstmt.setString(3, "snowman.jpg");
 			pstmt.setBlob(4, new FileInputStream("src/project/snow.jpg"));
-			pstmt.setInt(5, 3);  //boards Å×ÀÌºí¿¡ ÀÖ´Â °Ô½Ã¹° ¹øÈ£(bno) ÁöÁ¤
+			pstmt.setInt(5, 3);  //boards í…Œì´ë¸”ì— ìˆëŠ” ê²Œì‹œë¬¼ ë²ˆí˜¸(bno) ì§€ì •
 			
-			//SQL ¹® ½ÇÇà
+			//SQL ë¬¸ ì‹¤í–‰
 			int rows = pstmt.executeUpdate();
-			System.out.println("¼öÁ¤µÈ Çà ¼ö: " + rows);
+			System.out.println("ìˆ˜ì •ëœ í–‰ ìˆ˜: " + rows);
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
