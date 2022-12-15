@@ -2,7 +2,7 @@ package project;
 
 import lombok.Data;
 
-@Data //Constructor, Getter, Setter, hashCode(), equals(), toString() ÀÚµ¿ »ý¼º
+@Data //Constructor, Getter, Setter, hashCode(), equals(), toString() Ã€ÃšÂµÂ¿ Â»Ã½Â¼Âº
 public class User {
 	private String userId;
 	private String userName;
