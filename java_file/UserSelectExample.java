@@ -10,49 +10,49 @@ public class UserSelectExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = "" +
 				"SELECT userid, username, userpassword, userage, useremail " +
 				"FROM users " +
 				"WHERE userid=?";
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "winter");
 			
-			//SQL ¹® ½ÇÇà ÈÄ, ResultSetÀ» ÅëÇØ µ¥ÀÌÅÍ ÀĞ±â
+			//SQL ë¬¸ ì‹¤í–‰ í›„, ResultSetì„ í†µí•´ ë°ì´í„° ì½ê¸°
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {						//1°³ÀÇ µ¥ÀÌÅÍ ÇàÀ» °¡Á®¿ÔÀ» °æ¿ì
+			if(rs.next()) {						//1ê°œì˜ ë°ì´í„° í–‰ì„ ê°€ì ¸ì™”ì„ ê²½ìš°
 				User user = new User();				
 				user.setUserId(rs.getString("userid"));
 				user.setUserName(rs.getString("username"));
 				user.setUserPassword(rs.getString("userpassword"));
-				user.setUserAge(rs.getInt(4));       //ÄÃ·³ ¼ø¹øÀ» ÀÌ¿ë
-				user.setUserEmail(rs.getString(5));  //ÄÃ·³ ¼ø¹øÀ» ÀÌ¿ë				
+				user.setUserAge(rs.getInt(4));       //ì»¬ëŸ¼ ìˆœë²ˆì„ ì´ìš©
+				user.setUserEmail(rs.getString(5));  //ì»¬ëŸ¼ ìˆœë²ˆì„ ì´ìš©				
 				System.out.println(user);
-			} else {                           //µ¥ÀÌÅÍ ÇàÀ» °¡Á®¿ÀÁö ¾Ê¾ÒÀ» °æ¿ì
-				System.out.println("»ç¿ëÀÚ ¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾ÊÀ½");
+			} else {                           //ë°ì´í„° í–‰ì„ ê°€ì ¸ì˜¤ì§€ ì•Šì•˜ì„ ê²½ìš°
+				System.out.println("ì‚¬ìš©ì ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ");
 			}
 			rs.close();
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
