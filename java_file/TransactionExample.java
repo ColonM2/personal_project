@@ -9,55 +9,55 @@ public class TransactionExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//Æ®·£Àè¼Ç ½ÃÀÛ ----------------------------------------------------
-				//ÀÚµ¿ Ä¿¹Ô ±â´É ²ô±â
+			//íŠ¸ëœì­ì…˜ ì‹œì‘ ----------------------------------------------------
+				//ìë™ ì»¤ë°‹ ê¸°ëŠ¥ ë„ê¸°
 				conn.setAutoCommit(false);
 				
-				//Ãâ±İ ÀÛ¾÷
+				//ì¶œê¸ˆ ì‘ì—…
 				String sql1 = "UPDATE accounts SET balance=balance-? WHERE ano=?";
 				PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 				pstmt1.setInt(1,  10000);
 				pstmt1.setString(2, "111-111-1111");
 				int rows1 = pstmt1.executeUpdate();
-				if(rows1 == 0) throw new Exception("Ãâ±İµÇÁö ¾Ê¾ÒÀ½");
+				if(rows1 == 0) throw new Exception("ì¶œê¸ˆë˜ì§€ ì•Šì•˜ìŒ");
 				pstmt1.close();
 				
-				//ÀÔ±İ ÀÛ¾÷
+				//ì…ê¸ˆ ì‘ì—…
 				String sql2 = "UPDATE accounts SET balance=balance+? WHERE ano=?";
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setInt(1,  10000);
 				pstmt2.setString(2, "222-222-2222");
 				int rows2 = pstmt2.executeUpdate();
-				if(rows2 == 0) throw new Exception("ÀÔ±İµÇÁö ¾Ê¾ÒÀ½");
+				if(rows2 == 0) throw new Exception("ì…ê¸ˆë˜ì§€ ì•Šì•˜ìŒ");
 				pstmt2.close();
 			
-				//¼öµ¿ Ä¿¹Ô -> ¸ğµÎ ¼º°ø Ã³¸®
+				//ìˆ˜ë™ ì»¤ë°‹ -> ëª¨ë‘ ì„±ê³µ ì²˜ë¦¬
 				conn.commit();
-				System.out.println("°èÁÂ ÀÌÃ¼ ¼º°ø");	
-			//Æ®·£Àè¼Ç Á¾·á ----------------------------------------------------
+				System.out.println("ê³„ì¢Œ ì´ì²´ ì„±ê³µ");	
+			//íŠ¸ëœì­ì…˜ ì¢…ë£Œ ----------------------------------------------------
 		} catch (Exception e) {
 			try { 
-				//¼öµ¿ ·Ñ¹é -> ¸ğµÎ ½ÇÆĞ Ã³¸®
+				//ìˆ˜ë™ ë¡¤ë°± -> ëª¨ë‘ ì‹¤íŒ¨ ì²˜ë¦¬
 				conn.rollback();
 			} catch (SQLException e1) {}
-			System.out.println("°èÁÂ ÀÌÃ¼ ½ÇÆĞ");
+			System.out.println("ê³„ì¢Œ ì´ì²´ ì‹¤íŒ¨");
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try {
-					//¿ø·¡´ë·Î ÀÚµ¿ Ä¿¹Ô ±â´É ÄÑ±â
+					//ì›ë˜ëŒ€ë¡œ ìë™ ì»¤ë°‹ ê¸°ëŠ¥ ì¼œê¸°
 					conn.setAutoCommit(true);
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close();
 				} catch (SQLException e) {}
 			}
