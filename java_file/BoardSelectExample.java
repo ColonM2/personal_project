@@ -14,30 +14,30 @@ public class BoardSelectExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = "" +
 				"SELECT bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata " +
 				"FROM boards " +
 				"WHERE bwriter=?";
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "winter");
 			
-			//SQL ¹® ½ÇÇà ÈÄ, ResultSetÀ» ÅëÇØ µ¥ÀÌÅÍ ÀĞ±â
+			//SQL ë¬¸ ì‹¤í–‰ í›„, ResultSetì„ í†µí•´ ë°ì´í„° ì½ê¸°
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {		
-				//µ¥ÀÌÅÍ ÇàÀ» ÀĞ°í Board °´Ã¼ »ı¼º
+				//ë°ì´í„° í–‰ì„ ì½ê³  Board ê°ì²´ ìƒì„±
 				Board board = new Board();
 				board.setBno(rs.getInt("bno"));
 				board.setBtitle(rs.getString("btitle"));
@@ -47,10 +47,10 @@ public class BoardSelectExample {
 				board.setBfilename(rs.getString("bfilename"));
 				board.setBfiledata(rs.getBlob("bfiledata"));
 				
-				//ÄÜ¼Ö¿¡ Ãâ·Â
+				//ì½˜ì†”ì— ì¶œë ¥
 				System.out.println(board);
 				
-				//ÆÄÀÏ·Î ÀúÀå
+				//íŒŒì¼ë¡œ ì €ì¥
 				Blob blob = board.getBfiledata();
 				if(blob != null) {
 					InputStream is = blob.getBinaryStream();
@@ -63,14 +63,14 @@ public class BoardSelectExample {
 			}
 			rs.close();
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
