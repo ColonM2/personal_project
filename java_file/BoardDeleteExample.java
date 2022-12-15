@@ -9,35 +9,35 @@ public class BoardDeleteExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ SQL ¹® ÀÛ¼º
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ SQL ë¬¸ ì‘ì„±
 			String sql = "DELETE FROM boards WHERE bwriter=?";
 			
-			//PreparedStatement ¾ò±â ¹× °ª ÁöÁ¤
+			//PreparedStatement ì–»ê¸° ë° ê°’ ì§€ì •
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "winter");
 			
-			//SQL ¹® ½ÇÇà
+			//SQL ë¬¸ ì‹¤í–‰
 			int rows = pstmt.executeUpdate();
-			System.out.println("»èÁ¦µÈ Çà ¼ö: " + rows);
+			System.out.println("ì‚­ì œëœ í–‰ ìˆ˜: " + rows);
 			
-			//PreparedStatement ´İ±â
+			//PreparedStatement ë‹«ê¸°
 			pstmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
