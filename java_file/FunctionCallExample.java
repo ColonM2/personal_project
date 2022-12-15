@@ -10,37 +10,37 @@ public class FunctionCallExample {
 	public static void main(String[] args) {
 		Connection conn = null;
 		try {
-			//JDBC Driver µî·Ï
+			//JDBC Driver ë“±ë¡
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			//¿¬°áÇÏ±â
+			//ì—°ê²°í•˜ê¸°
 			conn = DriverManager.getConnection(
 				"jdbc:oracle:thin:@localhost:1521/XE", 
 				"java", 
 				"oracle"
 			);	
 			
-			//¸Å°³º¯¼öÈ­µÈ È£Ãâ¹® ÀÛ¼º°ú CallableStatement ¾ò±â
+			//ë§¤ê°œë³€ìˆ˜í™”ëœ í˜¸ì¶œë¬¸ ì‘ì„±ê³¼ CallableStatement ì–»ê¸°
 			String sql = "{? = call user_login(?, ?)}";
 			CallableStatement cstmt = conn.prepareCall(sql);
 			
-			//? °ª ÁöÁ¤ ¹× ¸®ÅÏ Å¸ÀÔ ÁöÁ¤
+			//? ê°’ ì§€ì • ë° ë¦¬í„´ íƒ€ì… ì§€ì •
 			cstmt.registerOutParameter(1, Types.INTEGER);
 			cstmt.setString(2, "winter");
 			cstmt.setString(3, "12345");
 			
-			//ÇÔ¼ö ½ÇÇà ¹× ¸®ÅÏ°ª ¾ò±â
+			//í•¨ìˆ˜ ì‹¤í–‰ ë° ë¦¬í„´ê°’ ì–»ê¸°
 			cstmt.execute();
 			int result = cstmt.getInt(1);
 			
-			//CallableStatement ´İ±â
+			//CallableStatement ë‹«ê¸°
 			cstmt.close();
 			
-			//·Î±×ÀÎ °á°ú(Switch Expressions ÀÌ¿ë)
+			//ë¡œê·¸ì¸ ê²°ê³¼(Switch Expressions ì´ìš©)
 			String message = switch(result) {
-				case 0 -> "·Î±×ÀÎ ¼º°ø";
-				case 1 -> "ºñ¹Ğ¹øÈ£°¡ Æ²¸²";
-				default -> "¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾ÊÀ½";
+				case 0 -> "ë¡œê·¸ì¸ ì„±ê³µ";
+				case 1 -> "ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦¼";
+				default -> "ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŒ";
 			};
 			System.out.println(message);
 		} catch (Exception e) {
@@ -48,7 +48,7 @@ public class FunctionCallExample {
 		} finally {
 			if(conn != null) {
 				try { 
-					//¿¬°á ²÷±â
+					//ì—°ê²° ëŠê¸°
 					conn.close(); 
 				} catch (SQLException e) {}
 			}
